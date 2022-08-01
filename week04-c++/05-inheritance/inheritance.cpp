@@ -1,11 +1,15 @@
 #include <stdio.h>
 
 /* Class definition and member function implementation here */
-class Vehicle{
+class Vehicle {
+    // protected variables are like private variables
+    // but are also available to the subclasses
     protected:
         int _mileage;
     public:
+        // we need a constructor that takes the vehicle's mileage
         Vehicle(int mileage){
+            // we can direct access the protected variable within this class' scope
             _mileage = mileage;
         }
 
@@ -14,13 +18,18 @@ class Vehicle{
         }
 };
 
-class Car : public Vehicle{
+// Car is declared as a subclass of Vehicle
+class Car : public Vehicle {
+    // no subclasses of car exist in this case, so no need for protected variables
     private:
         int _steering_wheels;
 
     public:
+        // we need a constructor that takes the mileage and the steering wheels
         Car(int mileage, int steering_wheels) : Vehicle(mileage), _steering_wheels(steering_wheels) {
             _steering_wheels = steering_wheels;
+            // we can access the _mileage member variable without declaring it
+            // because it's already declared in the superclass as a protected var
             _mileage = mileage;
         }
 
@@ -29,13 +38,18 @@ class Car : public Vehicle{
         }
 };
 
+// Motorbike is declared as a subclass of Vehicle
 class Motorbike : public Vehicle{
+    // no subclasses of vehicle exist in this case, so no need for protected variables
     private:
         int _cc_class;
 
     public:
+        // constructor that takes mileage and class
         Motorbike(int mileage, int cc_class) : Vehicle(mileage), _cc_class(cc_class) {
             _cc_class = cc_class;
+            // we can access the _mileage member variable without declaring it
+            // because it's already declared in the superclass as a protected var
             _mileage = mileage;
         }
 
@@ -62,4 +76,4 @@ int main(int argc, char **argv) {
 }
 // Run the below command to check answers; The one on github is outdated
 // Make sure you're in the same directory as this file when running the command
-// check50 -l --ansi-log olivierpierre/comp26020-problems/2022-2023/week4-c++/05-inheritance
+// check50 -l --log olivierpierre/comp26020-problems/2022-2023/week4-c++/05-inheritance
